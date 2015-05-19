@@ -15,6 +15,7 @@ namespace Puzzle
 
         public static Board play;
         public static Board goal;
+        public static bool highlightOn = true;
 
         public GameArea()
         {
@@ -68,6 +69,7 @@ namespace Puzzle
         private void Reset_Click(object sender, EventArgs e)
         {
             play.resetBoard();
+            goal.resetBoard();
             play.highlightAround();
         }
 
@@ -94,9 +96,7 @@ namespace Puzzle
 
         private void playBoard_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            play.fillSquare(e.Location);
-            play.highlightAround();
-            updateCount();
+
         }
 
         public void updateCount()
@@ -106,6 +106,34 @@ namespace Puzzle
             if (misplacedTiles == 0)
             {
                 MessageBox.Show("You won! Click 'New Game' or the (re)set buttons to play again.");
+            }
+        }
+
+        private void playBoard_MouseClick(object sender, MouseEventArgs e)
+        {
+            play.fillSquare(e.Location);
+            play.highlightAround();
+            updateCount();
+        }
+
+        private void highlight_Click(object sender, EventArgs e)
+        {
+            if (highlightOn)
+            {
+                highlight.Text = "Highlight Off";
+                highlightOn = false;
+                play.findTheBlank();
+                play.drawLines(false);
+                goal.drawLines(false);
+
+            }
+            else
+            {
+                MessageBox.Show("Sorry. This button doesn't work yet.");
+                //highlight.Text = "Highlight On";
+                //highlightOn = true;
+                //play.highlightAround();
+                //updateCount();
             }
         }
     }

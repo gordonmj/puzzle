@@ -39,6 +39,7 @@
             this.count = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.highlight = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // playBoard
@@ -50,6 +51,7 @@
             this.playBoard.Size = new System.Drawing.Size(512, 512);
             this.playBoard.TabIndex = 0;
             this.playBoard.Paint += new System.Windows.Forms.PaintEventHandler(this.playBoard_Paint);
+            this.playBoard.MouseClick += new System.Windows.Forms.MouseEventHandler(this.playBoard_MouseClick);
             this.playBoard.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.playBoard_MouseDoubleClick);
             // 
             // goalBoard
@@ -151,6 +153,7 @@
             this.count.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.count.AutoSize = true;
             this.count.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.count.ForeColor = System.Drawing.Color.White;
             this.count.Location = new System.Drawing.Point(1233, 270);
             this.count.Name = "count";
             this.count.Size = new System.Drawing.Size(32, 33);
@@ -161,6 +164,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(1123, 228);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(242, 33);
@@ -170,19 +174,36 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(25, 7);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(554, 20);
+            this.label2.Size = new System.Drawing.Size(491, 20);
             this.label2.TabIndex = 10;
-            this.label2.Text = "Double-Click on a Highlighted Number to Move it to the Blank Space";
+            this.label2.Text = "Click on a Highlighted Number to Move it to the Blank Space";
+            // 
+            // highlight
+            // 
+            this.highlight.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.highlight.BackColor = System.Drawing.SystemColors.Control;
+            this.highlight.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.highlight.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.highlight.Location = new System.Drawing.Point(1182, 327);
+            this.highlight.Name = "highlight";
+            this.highlight.Size = new System.Drawing.Size(144, 42);
+            this.highlight.TabIndex = 11;
+            this.highlight.Text = "Highlight On";
+            this.highlight.UseVisualStyleBackColor = false;
+            this.highlight.Click += new System.EventHandler(this.highlight_Click);
             // 
             // GameArea
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1397, 573);
+            this.Controls.Add(this.highlight);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.count);
@@ -215,6 +236,7 @@
         private System.Windows.Forms.Label count;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button highlight;
     }
 }
 

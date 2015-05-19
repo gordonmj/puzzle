@@ -49,7 +49,7 @@ namespace Puzzle
                     {
                         blankC = c;
                         blankR = r;
-                        pG.FillRectangle(new SolidBrush(Color.Gray), c * boxWidth, r * boxHeight, boxWidth, boxHeight);
+                        if(GameArea.highlightOn) pG.FillRectangle(new SolidBrush(Color.Gray), c * boxWidth, r * boxHeight, boxWidth, boxHeight);
                         drawLines(false);
                     }
                 }
@@ -100,6 +100,10 @@ namespace Puzzle
                 for (int c = 0; c < 4; c++)
                 {
                     pG.DrawRectangle(new Pen(new SolidBrush(Color.Black),4), c * boxWidth, r * boxHeight, boxWidth, boxHeight);
+                    if (!isNew && brd[r,c]!=0)
+                    {
+                        fillHelper(r, c, brd[r, c]);
+                    }
                 }//for c
             }//for r
         }
@@ -195,9 +199,10 @@ namespace Puzzle
         public void highlight(int num, int row, int col)
         {
             if (num == 0) return;
+            if (!GameArea.highlightOn) return;
             int offset = 30;
             if (num < 10) offset = 40;
-            pG.FillRectangle(new SolidBrush(Color.Red), col * boxWidth, row * boxHeight, boxWidth, boxHeight);
+            pG.FillRectangle(new SolidBrush(Color.Green), col * boxWidth, row * boxHeight, boxWidth, boxHeight);
             pG.DrawString(num.ToString(), new Font("Arial", 36), new SolidBrush(Color.White), new Point(col * boxWidth + offset, row * boxHeight + 30));
             drawLines(false);
         }
@@ -205,6 +210,7 @@ namespace Puzzle
         public void unhighlight(int num, int row, int col)
         {
             if (num == 0) return;
+            if (!GameArea.highlightOn) return;
             int offset = 30;
             if (num < 10) offset = 40;
             pG.FillRectangle(new SolidBrush(Color.White), col * boxWidth, row * boxHeight, boxWidth, boxHeight);
@@ -219,10 +225,14 @@ namespace Puzzle
             {
                 for (int c = 0; c < 4; c++)
                 {
+                    b.unhighlight(b.brd[r, c], r, c);
                     if (brd[r, c] != b.brd[r, c])
                     {
-                        //b.highlight(r, c, brd[r, c]);
                         count++;
+                    }
+                    else
+                    {
+                        b.highlight(b.brd[r, c], r, c);
                     }
                 }
             }
